@@ -1,5 +1,14 @@
 import { useState } from 'react'
 
+/**
+ * ProductForm component for creating and validating new SCENTORA perfume entries.
+ *
+ * @param {Object} props
+ * @param {Function} props.onSubmit - Callback invoked with the formatted product payload.
+ * @param {boolean} props.isSubmitting - Indicates whether the form submission is in progress.
+ * @param {string} props.errorMessage - Error alert message from the API request.
+ * @param {string} props.successMessage - Confirmation message shown after saving.
+ */
 function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
   const [formData, setFormData] = useState({
     name: '',

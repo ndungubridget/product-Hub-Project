@@ -12,6 +12,10 @@ function AddProduct() {
   const [errorMessage, setErrorMessage] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
 
+  /**
+   * Sends a POST request to create a new product and navigates back to the catalog.
+   * @param {Object} newProduct - Validated perfume payload from ProductForm.
+   */
   async function handleAddProduct(newProduct) {
     setIsSubmitting(true)
     setErrorMessage('')

@@ -120,6 +120,7 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
         <input
           id="name"
           aria-invalid={Boolean(errors.name)}
+          aria-describedby={errors.name ? "name-error" : undefined}
           name="name"
           type="text"
           value={formData.name}
@@ -138,6 +139,7 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
           <input
             id="price"
           aria-invalid={Boolean(errors.price)}
+          aria-describedby={errors.price ? "price-error" : undefined}
             name="price"
             type="number"
             value={formData.price}
@@ -155,6 +157,7 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
           <input
             id="stock"
           aria-invalid={Boolean(errors.stock)}
+          aria-describedby={errors.stock ? "stock-error" : undefined}
             name="stock"
             type="number"
             value={formData.stock}
@@ -173,6 +176,7 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
         <select
           id="category"
           aria-invalid={Boolean(errors.category)}
+          aria-describedby={errors.category ? "category-error" : undefined}
           name="category"
           value={formData.category}
           onChange={handleChange}
@@ -193,6 +197,7 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
         <input
           id="image"
           aria-invalid={Boolean(errors.image)}
+          aria-describedby={errors.image ? "image-error" : undefined}
           name="image"
           type="text"
           value={formData.image}
@@ -210,6 +215,7 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
         <textarea
           id="description"
           aria-invalid={Boolean(errors.description)}
+          aria-describedby={errors.description ? "description-error" : undefined}
           name="description"
           rows="4"
           value={formData.description}

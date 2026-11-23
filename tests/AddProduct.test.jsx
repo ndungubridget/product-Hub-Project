@@ -105,4 +105,21 @@ describe('AddProduct page', () => {
 
     expect(await screen.findByText('Velvet Oud')).toBeInTheDocument()
   })
+
+  it('clears field validation errors when the user updates the input', () => {
+    render(
+      <MemoryRouter initialEntries={['/products/new']}>
+        <AddProduct />
+      </MemoryRouter>
+    )
+
+    fireEvent.click(screen.getByRole('button', { name: /add product/i }))
+    expect(screen.getByText('Product name is required')).toBeInTheDocument()
+
+    fireEvent.change(screen.getByLabelText(/product name/i), {
+      target: { value: 'Amber Rose' }
+    })
+
+    expect(screen.queryByText('Product name is required')).not.toBeInTheDocument()
+  })
 })

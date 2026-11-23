@@ -122,4 +122,19 @@ describe('AddProduct page', () => {
 
     expect(screen.queryByText('Product name is required')).not.toBeInTheDocument()
   })
+
+  it('shows a validation error when stock is negative', () => {
+    render(
+      <MemoryRouter initialEntries={['/products/new']}>
+        <AddProduct />
+      </MemoryRouter>
+    )
+
+    fireEvent.change(screen.getByLabelText(/stock/i), {
+      target: { value: '-5' }
+    })
+    fireEvent.click(screen.getByRole('button', { name: /add product/i }))
+
+    expect(screen.getByText('Stock is required')).toBeInTheDocument()
+  })
 })

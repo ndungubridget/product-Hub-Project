@@ -1,108 +1,133 @@
 
-import { Link, useParams } from 'react-router-dom'
-import useProducts from '../hooks/useProducts'
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 
 function ProductDetail() {
   const { id } = useParams()
-  const { products, loading, error } = useProducts()
+  const navigate = useNavigate()
 
-  if (loading) {
-    return <p className="p-8 text-gray-600">Loading perfume details...</p>
+  const [product, setProduct] = useState(null)
+  const [form, setForm] = useState({})
+  const [editing, setEditing] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/products/${id}`)
+      .then(res => {
+        if (res.status === 404) throw new Error('Product not found')
+        if (!res.ok) throw new Error('Failed to load product')
+        return res.json()
+      })
+      .then(data => {
+        setProduct(data)
+        setForm(data)
+      })
+      .catch(err => setError(err.message))
+      .finally(() => setLoading(false))
+  }, [id])
+
+  async function handleUpdate(e) {
+    e.preventDefault()
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/products/${id}`,
+        {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            ...form,
+            price: Number(form.price),
+            stock: Number(form.stock)
+          })
+        }
+      )
+
+      if (!response.ok) throw new Error('Update failed')
+
+      const updated = await response.json()
+      setProduct(updated)
+      setForm(updated)
+      setEditing(false)
+    } catch (err) {
+      setError(err.message)
+    }
   }
 
-  if (error) {
-    return <p className="p-8 text-red-600">Error: {error}</p>
+  async function handleDelete() {
+    if (!window.confirm('Are you sure you want to delete this perfume?')) return
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/products/${id}`,
+        { method: 'DELETE' }
+      )
+
+      if (!response.ok) throw new Error('Delete failed')
+      navigate('/products')
+    } catch (err) {
+      setError(err.message)
+    }
   }
 
-  const product = products.find(
-    (item) => String(item.id) === id
-  )
-
-  if (!product) {
-    return (
-      <section className="p-8">
-        <h1 className="text-2xl font-bold text-gray-900">
-          Perfume not found
-        </h1>
-        <p className="text-gray-600 mt-2">
-          The perfume you are looking for does not exist.
-        </p>
-        <Link
-          to="/products"
-          className="inline-block mt-5 text-blue-600 hover:underline"
-        >
-          ← Back to products
-        </Link>
-      </section>
-    )
-  }
+  if (loading) return <p className="p-6">Loading product...</p>
+  if (!product) return <p className="p-6">{error || 'Product not found'}</p>
 
   return (
-    <section className="p-5 md:p-8">
-      <Link
-        to="/products"
-        className="text-sm text-blue-600 hover:underline"
-      >
-        ← Back to products
-      </Link>
+    <div className="p-6 max-w-3xl mx-auto">
+      <h1 className="text-3xl font-bold mb-6">Product Details</h1>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden mt-6">
-        <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="bg-[#edf2f5] min-h-80 flex items-center justify-center p-6">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="w-full h-80 object-contain"
-            />
-          </div>
+      {error && <p className="text-red-600">{error}</p>}
 
-          <div className="p-6 md:p-8">
-            <p className="text-sm uppercase tracking-wide text-yellow-700 font-semibold">
-              {product.brand}
-            </p>
+      <div className="bg-white rounded-xl shadow p-6">
+        {product.image && (
+          <img src={product.image} alt={product.name}
+            className="w-48 h-48 object-contain mb-4" />
+        )}
 
-            <h1 className="text-3xl font-bold text-[#263f59] mt-2">
-              {product.name}
-            </h1>
+        {editing ? (
+          <form onSubmit={handleUpdate} className="space-y-4">
+            {['name', 'price', 'category', 'description', 'image', 'stock'].map(field => (
+              <input
+                key={field}
+                type="text"
+                placeholder={field}
+                value={form[field] ?? ''}
+                onChange={e => setForm({
+                  ...form,
+                  [field]: e.target.value
+                })}
+                className="w-full border p-3 rounded-lg"
+              />
+            ))}
+            <button className="bg-green-700 text-white px-5 py-2 rounded-lg">
+              Save Changes
+            </button>
+          </form>
+        ) : (
+          <>
+            <h2 className="text-2xl font-bold">{product.name}</h2>
+            <p>Category: {product.category}</p>
+            <p>Price: KSh {product.price}</p>
+            <p>Stock: {product.stock}</p>
+            <p className="mt-3">{product.description}</p>
+          </>
+        )}
 
-            <p className="text-gray-500 mt-3">
-              {product.category} · {product.concentration}
-            </p>
+        <div className="flex flex-wrap gap-3 mt-6">
+          <button onClick={() => setEditing(!editing)}
+            className="bg-blue-700 text-white px-5 py-2 rounded-lg">
+            {editing ? 'Cancel Editing' : 'Edit Product'}
+          </button>
 
-            <p className="text-2xl font-bold text-[#263f59] mt-6">
-              KSh {Number(product.price).toLocaleString()}
-            </p>
-
-            <div className="grid grid-cols-2 gap-4 mt-7">
-              <div className="bg-gray-50 rounded-lg p-4">
-                <p className="text-xs text-gray-500">Bottle Size</p>
-                <p className="font-semibold mt-1">
-                  {product.size} ml
-                </p>
-              </div>
-
-              <div className="bg-gray-50 rounded-lg p-4">
-                <p className="text-xs text-gray-500">Available Stock</p>
-                <p className="font-semibold mt-1">
-                  {product.stock} units
-                </p>
-              </div>
-            </div>
-
-            {product.description && (
-              <div className="mt-7">
-                <h2 className="font-bold text-[#263f59]">
-                  Description
-                </h2>
-                <p className="text-sm text-gray-600 mt-2 leading-relaxed">
-                  {product.description}
-                </p>
-              </div>
-            )}
-          </div>
+          <button onClick={handleDelete}
+            className="bg-red-600 text-white px-5 py-2 rounded-lg">
+            Delete Product
+          </button>
         </div>
       </div>
-    </section>
+    </div>
   )
 }
 

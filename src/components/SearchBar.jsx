@@ -1,4 +1,3 @@
-
 function SearchBar({ searchTerm, onSearchChange }) {
   return (
     <div className="w-full md:max-w-md">

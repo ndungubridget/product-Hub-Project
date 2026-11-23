@@ -1,0 +1,107 @@
+
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Oud Mood",
+      "brand": "Lattafa",
+      "category": "Unisex",
+      "concentration": "Eau de Parfum",
+      "size": 100,
+      "price": 2500,
+      "stock": 20,
+      "image": "https://maulux.mu/cdn/shop/files/186.0Lattafa_Oud_Mood_EDP_100ML_perfume_in_Mauritius_at_Mauluxmu_shop_top_fragrance_brandsbest_perfume_prices_affordable_perfume_deals_and_a_complete_perfume_price_list_online_ba172323-17c6-4cbf-b8eb-a820dac3513c.webp?v=1751722915",
+      "description": "A warm oriental fragrance with rich oud and sweet notes.",
+      "notes": {
+        "top": ["Saffron", "Rose"],
+        "middle": ["Oud", "Caramel"],
+        "base": ["Amber", "Musk"]
+      }
+    },
+    {
+      "id": 2,
+      "name": "Baccarat Rouge 540",
+      "brand": "Maison Francis Kurkdjian",
+      "category": "Unisex",
+      "concentration": "Eau de Parfum",
+      "size": 70,
+      "price": 18000,
+      "stock": 12,
+      "image": "https://www.olfactoryfactoryllc.com/cdn/shop/products/maison-francis-kurkdjian-baccarat-rouge-540-en.jpg",
+      "description": "An elegant fragrance with warm amber and woody accords.",
+      "notes": {
+        "top": ["Saffron", "Jasmine"],
+        "middle": ["Amberwood", "Ambergris"],
+        "base": ["Fir Resin", "Cedar"]
+      }
+    },
+    {
+      "id": 3,
+      "name": "Sauvage",
+      "brand": "Dior",
+      "category": "Men",
+      "concentration": "Eau de Toilette",
+      "size": 100,
+      "price": 14500,
+      "stock": 15,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAVeir4i9nFdg99H4eVOBSmUQZ7r9d4yBH9gJzgDsXBu7Z8mpRYOdHVg&s=10",
+      "description": "A fresh and bold fragrance with citrus and woody notes.",
+      "notes": {
+        "top": ["Bergamot", "Pepper"],
+        "middle": ["Lavender", "Geranium"],
+        "base": ["Ambroxan", "Cedar"]
+      }
+    },
+    {
+      "id": 4,
+      "name": "Libre",
+      "brand": "Yves Saint Laurent",
+      "category": "Women",
+      "concentration": "Eau de Parfum",
+      "size": 90,
+      "price": 13500,
+      "stock": 10,
+      "image": "https://d1kvfoyrif6wzg.cloudfront.net/assets/images/655/60238/none_d779ff23c65722c370005d37dd9fc31d_d779ff2.JPEG",
+      "description": "A floral fragrance combining lavender and orange blossom.",
+      "notes": {
+        "top": ["Mandarin", "Blackcurrant"],
+        "middle": ["Lavender", "Orange Blossom"],
+        "base": ["Vanilla", "Musk"]
+      }
+    },
+    {
+      "id": 5,
+      "name": "Club de Nuit Intense Man",
+      "brand": "Armaf",
+      "category": "Men",
+      "concentration": "Eau de Toilette",
+      "size": 105,
+      "price": 6500,
+      "stock": 25,
+      "image": "https://thecrownperfumes.com/cdn/shop/files/armaf_club_de_nuit_intense_for_man.webp?v=1745439729&width=1946",
+      "description": "A powerful fruity and woody fragrance.",
+      "notes": {
+        "top": ["Lemon", "Pineapple"],
+        "middle": ["Birch", "Jasmine"],
+        "base": ["Musk", "Ambergris"]
+      }
+    },
+    {
+      "id": 6,
+      "name": "La Vie Est Belle",
+      "brand": "Lancôme",
+      "category": "Women",
+      "concentration": "Eau de Parfum",
+      "size": 75,
+      "price": 12000,
+      "stock": 8,
+      "image": "https://media.falabella.com/falabellaCO/1777816_1/w%3D1500%2Ch%3D1500%2Cfit%3Dcover",
+      "description": "A sweet floral fragrance with fruity and gourmand notes.",
+      "notes": {
+        "top": ["Blackcurrant", "Pear"],
+        "middle": ["Iris", "Jasmine"],
+        "base": ["Vanilla", "Praline"]
+      }
+    }
+  ]
+}

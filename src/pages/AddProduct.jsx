@@ -2,6 +2,10 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ProductForm from '../components/ProductForm'
 
+/**
+ * AddProduct page component that handles submitting new perfumes to the backend API
+ * and redirecting to the product catalog on success.
+ */
 function AddProduct() {
   const navigate = useNavigate()
   const [isSubmitting, setIsSubmitting] = useState(false)

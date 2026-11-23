@@ -219,6 +219,7 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
       <button
         type="submit"
         disabled={isSubmitting}
+        aria-busy={isSubmitting}
         className="w-full bg-[#1d4162] hover:bg-[#2876b5] text-white font-medium py-2.5 rounded-lg transition-colors"
       >
         {isSubmitting ? 'Saving...' : 'Add Product'}

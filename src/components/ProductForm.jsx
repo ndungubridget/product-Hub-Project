@@ -96,7 +96,7 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} noValidate className="space-y-4">
       {errorMessage && (
         <p role="alert" className="p-3 bg-red-100 text-red-700 rounded-lg text-sm">
           {errorMessage}

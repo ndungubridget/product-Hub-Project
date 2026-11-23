@@ -174,4 +174,44 @@ describe('AddProduct page', () => {
       await screen.findByRole('alert')
     ).toHaveTextContent('Could not save the product. Please try again.')
   })
+
+  it('disables the submit button and shows Saving... while submitting', async () => {
+    let resolveFetch
+    vi.spyOn(global, 'fetch').mockImplementation(
+      () => new Promise((resolve) => { resolveFetch = resolve })
+    )
+
+    render(
+      <MemoryRouter initialEntries={['/products/new']}>
+        <AddProduct />
+      </MemoryRouter>
+    )
+
+    fireEvent.change(screen.getByLabelText(/product name/i), {
+      target: { value: 'Cedar Noir' }
+    })
+    fireEvent.change(screen.getByLabelText(/price/i), {
+      target: { value: '4800' }
+    })
+    fireEvent.change(screen.getByLabelText(/stock/i), {
+      target: { value: '10' }
+    })
+    fireEvent.change(screen.getByLabelText(/category/i), {
+      target: { value: 'Unisex' }
+    })
+    fireEvent.change(screen.getByLabelText(/image url/i), {
+      target: { value: 'https://example.com/cedar-noir.jpg' }
+    })
+    fireEvent.change(screen.getByLabelText(/description/i), {
+      target: { value: 'Deep cedarwood and amber blend.' }
+    })
+
+    fireEvent.click(screen.getByRole('button', { name: /add product/i }))
+
+    const savingBtn = await screen.findByRole('button', { name: /saving.../i })
+    expect(savingBtn).toBeDisabled()
+    expect(savingBtn).toHaveAttribute('aria-busy', 'true')
+
+    resolveFetch({ ok: true, json: () => Promise.resolve({ id: 9 }) })
+  })
 })

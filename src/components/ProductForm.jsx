@@ -115,6 +115,7 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
         </label>
         <input
           id="name"
+          aria-invalid={Boolean(errors.name)}
           name="name"
           type="text"
           value={formData.name}
@@ -200,6 +201,7 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
         </label>
         <textarea
           id="description"
+          aria-invalid={Boolean(errors.description)}
           name="description"
           rows="4"
           value={formData.description}

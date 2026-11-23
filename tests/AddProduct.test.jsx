@@ -213,5 +213,6 @@ describe('AddProduct page', () => {
     expect(savingBtn).toHaveAttribute('aria-busy', 'true')
 
     resolveFetch({ ok: true, json: () => Promise.resolve({ id: 9 }) })
+    expect(await screen.findByRole('status')).toBeInTheDocument()
   })
 })

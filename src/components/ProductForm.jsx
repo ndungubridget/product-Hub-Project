@@ -133,6 +133,7 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
           </label>
           <input
             id="price"
+          aria-invalid={Boolean(errors.price)}
             name="price"
             type="number"
             value={formData.price}
@@ -149,6 +150,7 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
           </label>
           <input
             id="stock"
+          aria-invalid={Boolean(errors.stock)}
             name="stock"
             type="number"
             value={formData.stock}
@@ -166,6 +168,7 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
         </label>
         <select
           id="category"
+          aria-invalid={Boolean(errors.category)}
           name="category"
           value={formData.category}
           onChange={handleChange}
@@ -185,6 +188,7 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
         </label>
         <input
           id="image"
+          aria-invalid={Boolean(errors.image)}
           name="image"
           type="text"
           value={formData.image}

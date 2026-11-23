@@ -37,6 +37,10 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
     }
   }
 
+  /**
+   * Validates all required perfume form fields before submission.
+   * @returns {boolean} True when all inputs pass validation checks.
+   */
   function validateForm() {
     const newErrors = {}
 

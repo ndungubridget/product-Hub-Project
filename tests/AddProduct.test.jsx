@@ -1,3 +1,6 @@
+/**
+ * @file Integration and validation test suite for the AddProduct page and ProductForm component.
+ */
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
@@ -104,5 +107,130 @@ describe('AddProduct page', () => {
     })
 
     expect(await screen.findByText('Velvet Oud')).toBeInTheDocument()
+  })
+
+  it('clears field validation errors when the user updates the input', () => {
+    render(
+      <MemoryRouter initialEntries={['/products/new']}>
+        <AddProduct />
+      </MemoryRouter>
+    )
+
+    fireEvent.click(screen.getByRole('button', { name: /add product/i }))
+    expect(screen.getByText('Product name is required')).toBeInTheDocument()
+
+    fireEvent.change(screen.getByLabelText(/product name/i), {
+      target: { value: 'Amber Rose' }
+    })
+
+    expect(screen.queryByText('Product name is required')).not.toBeInTheDocument()
+  })
+
+  it('shows a validation error when stock is negative', () => {
+    render(
+      <MemoryRouter initialEntries={['/products/new']}>
+        <AddProduct />
+      </MemoryRouter>
+    )
+
+    fireEvent.change(screen.getByLabelText(/stock/i), {
+      target: { value: '-5' }
+    })
+    fireEvent.click(screen.getByRole('button', { name: /add product/i }))
+
+    expect(screen.getByText('Stock is required')).toBeInTheDocument()
+  })
+
+  it('displays an error alert when saving the product fails', async () => {
+    vi.spyOn(global, 'fetch').mockResolvedValue({
+      ok: false
+    })
+
+    render(
+      <MemoryRouter initialEntries={['/products/new']}>
+        <AddProduct />
+      </MemoryRouter>
+    )
+
+    fireEvent.change(screen.getByLabelText(/product name/i), {
+      target: { value: 'Saffron Mist' }
+    })
+    fireEvent.change(screen.getByLabelText(/price/i), {
+      target: { value: '4200' }
+    })
+    fireEvent.change(screen.getByLabelText(/stock/i), {
+      target: { value: '8' }
+    })
+    fireEvent.change(screen.getByLabelText(/category/i), {
+      target: { value: 'Unisex' }
+    })
+    fireEvent.change(screen.getByLabelText(/image url/i), {
+      target: { value: 'https://example.com/saffron-mist.jpg' }
+    })
+    fireEvent.change(screen.getByLabelText(/description/i), {
+      target: { value: 'Warm saffron and floral notes.' }
+    })
+
+    fireEvent.click(screen.getByRole('button', { name: /add product/i }))
+
+    expect(
+      await screen.findByRole('alert')
+    ).toHaveTextContent('Could not save the product. Please try again.')
+  })
+
+  it('disables the submit button and shows Saving... while submitting', async () => {
+    let resolveFetch
+    vi.spyOn(global, 'fetch').mockImplementation(
+      () => new Promise((resolve) => { resolveFetch = resolve })
+    )
+
+    render(
+      <MemoryRouter initialEntries={['/products/new']}>
+        <AddProduct />
+      </MemoryRouter>
+    )
+
+    fireEvent.change(screen.getByLabelText(/product name/i), {
+      target: { value: 'Cedar Noir' }
+    })
+    fireEvent.change(screen.getByLabelText(/price/i), {
+      target: { value: '4800' }
+    })
+    fireEvent.change(screen.getByLabelText(/stock/i), {
+      target: { value: '10' }
+    })
+    fireEvent.change(screen.getByLabelText(/category/i), {
+      target: { value: 'Unisex' }
+    })
+    fireEvent.change(screen.getByLabelText(/image url/i), {
+      target: { value: 'https://example.com/cedar-noir.jpg' }
+    })
+    fireEvent.change(screen.getByLabelText(/description/i), {
+      target: { value: 'Deep cedarwood and amber blend.' }
+    })
+
+    fireEvent.click(screen.getByRole('button', { name: /add product/i }))
+
+    const savingBtn = await screen.findByRole('button', { name: /saving.../i })
+    expect(savingBtn).toBeDisabled()
+    expect(savingBtn).toHaveAttribute('aria-busy', 'true')
+
+    resolveFetch({ ok: true, json: () => Promise.resolve({ id: 9 }) })
+    expect(await screen.findByRole('status')).toBeInTheDocument()
+  })
+
+  it('links invalid fields to their error messages via aria attributes', () => {
+    render(
+      <MemoryRouter initialEntries={['/products/new']}>
+        <AddProduct />
+      </MemoryRouter>
+    )
+
+    fireEvent.click(screen.getByRole('button', { name: /add product/i }))
+
+    const nameInput = screen.getByLabelText(/product name/i)
+    expect(nameInput).toHaveAttribute('aria-invalid', 'true')
+    expect(nameInput).toHaveAttribute('aria-describedby', 'name-error')
+    expect(document.getElementById('name-error')).toHaveTextContent('Product name is required')
   })
 })

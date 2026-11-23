@@ -1,0 +1,180 @@
+{
+  "store_info": [
+    {
+      "id": 1,
+      "name": "SCENTORA",
+      "tagline": "Store management",
+      "description": "A cart full of scents \u2014 premium perfume e-commerce admin portal.",
+      "phone_number": "555-0199",
+      "status": "Store is live"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Chanel No. 5",
+      "brand": "Chanel",
+      "price": 18500,
+      "stock": 24,
+      "category": "Women",
+      "description": "Timeless floral aldehyde classic.",
+      "scent": "#f5e6c8",
+      "accent": "#b8860b"
+    },
+    {
+      "id": 2,
+      "name": "Dior Sauvage",
+      "brand": "Dior",
+      "price": 16800,
+      "stock": 31,
+      "category": "Men",
+      "description": "Fresh spicy ambroxan signature.",
+      "scent": "#dfe9f2",
+      "accent": "#4a6fa5"
+    },
+    {
+      "id": 3,
+      "name": "Versace Eros",
+      "brand": "Versace",
+      "price": 12500,
+      "stock": 18,
+      "category": "Men",
+      "description": "Minty oriental vanilla.",
+      "scent": "#e2f0e6",
+      "accent": "#2e7d5b"
+    },
+    {
+      "id": 4,
+      "name": "YSL Libre",
+      "brand": "Yves Saint Laurent",
+      "price": 17200,
+      "stock": 27,
+      "category": "Women",
+      "description": "Bold lavender orange blossom.",
+      "scent": "#fdeedd",
+      "accent": "#c47f3e"
+    },
+    {
+      "id": 5,
+      "name": "Tom Ford Oud Wood",
+      "brand": "Tom Ford",
+      "price": 24000,
+      "stock": 9,
+      "category": "Unisex",
+      "description": "Smoky oud and sandalwood.",
+      "scent": "#e8dfd3",
+      "accent": "#6b4f2e"
+    },
+    {
+      "id": 6,
+      "name": "Marc Jacobs Daisy",
+      "brand": "Marc Jacobs",
+      "price": 9800,
+      "stock": 40,
+      "category": "Women",
+      "description": "Playful violet and strawberry.",
+      "scent": "#fdeef4",
+      "accent": "#c26a8d"
+    }
+  ],
+  "orders": [
+    {
+      "id": 1048,
+      "customer": "Grace Wanjiku",
+      "product": "Chanel No. 5",
+      "date": "18 Nov, 2026",
+      "amount": 18500,
+      "status": "Delivered"
+    },
+    {
+      "id": 1047,
+      "customer": "James Mwangi",
+      "product": "Dior Sauvage",
+      "date": "18 Nov, 2026",
+      "amount": 16800,
+      "status": "Processing"
+    },
+    {
+      "id": 1046,
+      "customer": "Amina Hassan",
+      "product": "YSL Libre",
+      "date": "17 Nov, 2026",
+      "amount": 17200,
+      "status": "Shipped"
+    },
+    {
+      "id": 1045,
+      "customer": "Brian Otieno",
+      "product": "Versace Eros",
+      "date": "17 Nov, 2026",
+      "amount": 12500,
+      "status": "Delivered"
+    },
+    {
+      "id": 1044,
+      "customer": "Cynthia Adhiambo",
+      "product": "Tom Ford Oud Wood",
+      "date": "16 Nov, 2026",
+      "amount": 24000,
+      "status": "Shipped"
+    },
+    {
+      "id": 1043,
+      "customer": "David Kiprop",
+      "product": "Marc Jacobs Daisy",
+      "date": "15 Nov, 2026",
+      "amount": 9800,
+      "status": "Processing"
+    }
+  ],
+  "sales": [
+    {
+      "month": "Jan",
+      "revenue": 11000
+    },
+    {
+      "month": "Feb",
+      "revenue": 14000
+    },
+    {
+      "month": "Mar",
+      "revenue": 12500
+    },
+    {
+      "month": "Apr",
+      "revenue": 16500
+    },
+    {
+      "month": "May",
+      "revenue": 15500
+    },
+    {
+      "month": "Jun",
+      "revenue": 19000
+    },
+    {
+      "month": "Jul",
+      "revenue": 18000
+    },
+    {
+      "month": "Aug",
+      "revenue": 22000
+    },
+    {
+      "month": "Sep",
+      "revenue": 20500
+    },
+    {
+      "month": "Oct",
+      "revenue": 23000
+    },
+    {
+      "month": "Nov",
+      "revenue": 24000
+    },
+    {
+      "month": "Dec",
+      "revenue": 28500
+    }
+  ]
+}

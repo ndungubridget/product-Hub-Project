@@ -137,4 +137,41 @@ describe('AddProduct page', () => {
 
     expect(screen.getByText('Stock is required')).toBeInTheDocument()
   })
+
+  it('displays an error alert when saving the product fails', async () => {
+    vi.spyOn(global, 'fetch').mockResolvedValue({
+      ok: false
+    })
+
+    render(
+      <MemoryRouter initialEntries={['/products/new']}>
+        <AddProduct />
+      </MemoryRouter>
+    )
+
+    fireEvent.change(screen.getByLabelText(/product name/i), {
+      target: { value: 'Saffron Mist' }
+    })
+    fireEvent.change(screen.getByLabelText(/price/i), {
+      target: { value: '4200' }
+    })
+    fireEvent.change(screen.getByLabelText(/stock/i), {
+      target: { value: '8' }
+    })
+    fireEvent.change(screen.getByLabelText(/category/i), {
+      target: { value: 'Unisex' }
+    })
+    fireEvent.change(screen.getByLabelText(/image url/i), {
+      target: { value: 'https://example.com/saffron-mist.jpg' }
+    })
+    fireEvent.change(screen.getByLabelText(/description/i), {
+      target: { value: 'Warm saffron and floral notes.' }
+    })
+
+    fireEvent.click(screen.getByRole('button', { name: /add product/i }))
+
+    expect(
+      await screen.findByRole('alert')
+    ).toHaveTextContent('Could not save the product. Please try again.')
+  })
 })

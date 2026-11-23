@@ -1,3 +1,6 @@
+/**
+ * @file Integration and validation test suite for the AddProduct page and ProductForm component.
+ */
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { describe, it, expect, vi, beforeEach } from 'vitest'

@@ -215,4 +215,19 @@ describe('AddProduct page', () => {
     resolveFetch({ ok: true, json: () => Promise.resolve({ id: 9 }) })
     expect(await screen.findByRole('status')).toBeInTheDocument()
   })
+
+  it('links invalid fields to their error messages via aria attributes', () => {
+    render(
+      <MemoryRouter initialEntries={['/products/new']}>
+        <AddProduct />
+      </MemoryRouter>
+    )
+
+    fireEvent.click(screen.getByRole('button', { name: /add product/i }))
+
+    const nameInput = screen.getByLabelText(/product name/i)
+    expect(nameInput).toHaveAttribute('aria-invalid', 'true')
+    expect(nameInput).toHaveAttribute('aria-describedby', 'name-error')
+    expect(document.getElementById('name-error')).toHaveTextContent('Product name is required')
+  })
 })

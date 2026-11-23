@@ -128,7 +128,7 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
           placeholder="e.g. Oud Mood"
           className="w-full p-2.5 border border-gray-300 rounded-lg"
         />
-        {errors.name && <p className="text-red-600 text-xs mt-1">{errors.name}</p>}
+        {errors.name && <p id="name-error" className="text-red-600 text-xs mt-1">{errors.name}</p>}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -147,7 +147,7 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
             placeholder="e.g. 2500"
             className="w-full p-2.5 border border-gray-300 rounded-lg"
           />
-          {errors.price && <p className="text-red-600 text-xs mt-1">{errors.price}</p>}
+          {errors.price && <p id="price-error" className="text-red-600 text-xs mt-1">{errors.price}</p>}
         </div>
 
         <div>
@@ -165,7 +165,7 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
             placeholder="e.g. 10"
             className="w-full p-2.5 border border-gray-300 rounded-lg"
           />
-          {errors.stock && <p className="text-red-600 text-xs mt-1">{errors.stock}</p>}
+          {errors.stock && <p id="stock-error" className="text-red-600 text-xs mt-1">{errors.stock}</p>}
         </div>
       </div>
 
@@ -187,7 +187,7 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
           <option value="Men">Men</option>
           <option value="Women">Women</option>
         </select>
-        {errors.category && <p className="text-red-600 text-xs mt-1">{errors.category}</p>}
+        {errors.category && <p id="category-error" className="text-red-600 text-xs mt-1">{errors.category}</p>}
       </div>
 
       <div>
@@ -205,7 +205,7 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
           placeholder="https://..."
           className="w-full p-2.5 border border-gray-300 rounded-lg"
         />
-        {errors.image && <p className="text-red-600 text-xs mt-1">{errors.image}</p>}
+        {errors.image && <p id="image-error" className="text-red-600 text-xs mt-1">{errors.image}</p>}
       </div>
 
       <div>
@@ -223,7 +223,7 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
           placeholder="Write a short description of the perfume..."
           className="w-full p-2.5 border border-gray-300 rounded-lg"
         />
-        {errors.description && <p className="text-red-600 text-xs mt-1">{errors.description}</p>}
+        {errors.description && <p id="description-error" className="text-red-600 text-xs mt-1">{errors.description}</p>}
       </div>
 
       <button

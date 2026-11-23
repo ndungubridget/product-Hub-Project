@@ -98,13 +98,13 @@ function ProductForm({ onSubmit, isSubmitting, errorMessage, successMessage }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {errorMessage && (
-        <p className="p-3 bg-red-100 text-red-700 rounded-lg text-sm">
+        <p role="alert" className="p-3 bg-red-100 text-red-700 rounded-lg text-sm">
           {errorMessage}
         </p>
       )}
 
       {successMessage && (
-        <p className="p-3 bg-green-100 text-green-700 rounded-lg text-sm">
+        <p role="status" className="p-3 bg-green-100 text-green-700 rounded-lg text-sm">
           {successMessage}
         </p>
       )}
